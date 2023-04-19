@@ -27,9 +27,6 @@ def get_now_time():
 
 def binary_focal_loss(gamma=2, alpha=0.5):
     """
-    Binary form of focal loss.
-    适用于二分类问题的focal loss
-
     focal_loss(p_t) = -alpha_t * (1 - p_t)**gamma * log(p_t)
         where p = sigmoid(x), p_t = p or 1 - p depending on if the label is 1 or 0, respectively.
     References:
