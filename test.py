@@ -11,9 +11,6 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.models import load_model
 def binary_focal_loss(gamma=2, alpha=0.5):
     """
-    Binary form of focal loss.
-    适用于二分类问题的focal loss
-
     focal_loss(p_t) = -alpha_t * (1 - p_t)**gamma * log(p_t)
         where p = sigmoid(x), p_t = p or 1 - p depending on if the label is 1 or 0, respectively.
     References:
@@ -51,7 +48,7 @@ task = args.task
 data = args.data
 
 acc, roc_auc, recall, f1, mcc = [], [], [], [], []
-ckpt = f'ckpt_comb/ckpt_val=test/focal_gam2/{task}_independent_set_focal_comb.h5'
+ckpt = f'ckpt_path'
 model = load_model(ckpt,custom_objects={'binary_focal_loss_fixed': binary_focal_loss()})
 with open('tokenizer.json') as f:
     token = json.load(f)
