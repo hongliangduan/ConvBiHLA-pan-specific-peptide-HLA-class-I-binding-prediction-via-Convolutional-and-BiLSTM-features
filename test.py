@@ -41,22 +41,20 @@ def cut(x):
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--task', default='fold0', required=False)
-parser.add_argument('--data', default='external', required=False)
+parser.add_argument('--test_file', required=True)
+parser.add_argument('--ckpt_path', required=True)
 args = parser.parse_args()
 task = args.task
-data = args.data
-
-acc, roc_auc, recall, f1, mcc = [], [], [], [], []
-ckpt = f'ckpt_path'
-model = load_model(ckpt,custom_objects={'binary_focal_loss_fixed': binary_focal_loss()})
+test_file = args.test_file
+ckpt_path = args.ckpt_path
+model = load_model(ckpt_path,custom_objects={'binary_focal_loss_fixed': binary_focal_loss()})
 with open('tokenizer.json') as f:
     token = json.load(f)
     tokenizer =text.tokenizer_from_json(token)
     word_index = tokenizer.word_index
     print(word_index)
 
-test = pd.read_csv(f"val_data_fold0.csv")
+test = pd.read_csv(test_file)
 x_test = tokenizer.texts_to_sequences([cut(x) for x in list(test['comb'])])
 x_test_padded_seqs = pad_sequences(x_test, maxlen=50,padding='post',truncating='post')  # padding
 y_test = to_categorical(list(test['label']), num_classes=2)
