@@ -7,9 +7,9 @@ tensorflow==2.0
 Step 1. Train the model 
 Run the following command in the terminal
 
-```python train.py --task fold0 --test_data val_data_fold0" 
+python train.py --task fold0 --test_data val_data_fold0
 
 Step 2. Test the model 
 Run the following command in the terminal
 
-```python test.py --ckpt_path ckpt/fold0.h5 --test_file independent_set" 
+python test.py --ckpt_path ckpt/fold0.h5 --test_file independent_set
